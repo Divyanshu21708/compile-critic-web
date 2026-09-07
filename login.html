@@ -58,11 +58,7 @@
 </div>
 
 <script>
-    const BACKEND_PORT = 5001;
-    const API_BASE = (window.location.port === String(BACKEND_PORT))
-        ? ''
-        : `http://${window.location.hostname || 'localhost'}:${BACKEND_PORT}`;
-
+    const API_BASE = "";
     const loginSection = document.getElementById('login-section');
     const registerSection = document.getElementById('register-section');
     const showRegisterBtn = document.getElementById('show-register');
@@ -107,7 +103,7 @@
             }
         } catch (error) {
             console.error('Registration fetch error:', error);
-            alert(`Connection Error: Unable to connect to backend server at http://localhost:${BACKEND_PORT}. Make sure 'npm start' or 'node server.js' is running!`);
+            alert("Connection Error: Unable to reach the server.");
         }
     });
 
