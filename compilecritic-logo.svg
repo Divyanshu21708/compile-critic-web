@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 140" width="100%" height="100%">
+  <defs>
+    <!-- Bracket Gradient -->
+    <linearGradient id="bracketGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="48%" stop-color="#3b82f6"/>
+      <stop offset="54%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <!-- Text Gradient -->
+    <linearGradient id="criticGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ICON PART -->
+  <g transform="translate(15, 10) scale(0.6)">
+    <rect width="200" height="200" rx="46" fill="#0b1120"/>
+    <rect width="198" height="198" x="1" y="1" rx="45" fill="none" stroke="#1e293b" stroke-width="2"/>
+    <circle cx="144" cy="60" r="10" fill="#f59e0b"/>
+    <path d="M 78 62 L 50 90 L 100 140 L 150 90 L 122 62" fill="none" stroke="url(#bracketGrad)" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- TEXT PART -->
+  <g transform="translate(150, 15)">
+    <!-- Main CompileCritic Text -->
+    <text x="0" y="60" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="74" font-weight="900" letter-spacing="-1">
+      <tspan fill="#ffffff">Compile</tspan><tspan fill="url(#criticGrad)">Critic</tspan>
+    </text>
+    
+    <!-- Tagline (Taller, bolder, and letter-spacing adjusted to match width perfectly) -->
+    <text x="2" y="106" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="900" fill="#94a3b8" letter-spacing="6.5">
+      AI CODE LEARNING PLATFORM
+    </text>
+  </g>
+</svg>

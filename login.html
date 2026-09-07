@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CompileCritic - AI Code Learning Platform</title>
+<link rel="icon" href="compilecritic-icon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Updated to point to login.css -->
+<link rel="stylesheet" href="login.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-container">
+    <div class="logo" onclick="window.location.href='home.html'" style="cursor: pointer;">
+    <img src="compilecritic-logo.svg" alt="CompileCritic Logo" style="height: 65px; width: auto; display: block;">
+</div>
+    
+    <div class="auth-card">
+        <!-- Login Form -->
+        <div id="login-section">
+            <h2 class="auth-title">Welcome Back</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required placeholder="Enter your password">
+                </div>
+                <button type="submit" class="action-btn run-btn auth-btn">Login</button>
+            </form>
+            <p class="auth-switch">Don't have an account? <span id="show-register">Register here</span></p>
+        </div>
+
+        <!-- Registration Form (Hidden by default) -->
+        <div id="register-section" style="display: none;">
+            <h2 class="auth-title">Create Account</h2>
+            <form id="register-form">
+                <div class="input-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" required placeholder="Enter your name">
+                </div>
+                <div class="input-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" required placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" required placeholder="Create a password">
+                </div>
+                <button type="submit" class="action-btn ai-btn auth-btn">Sign Up</button>
+            </form>
+            <p class="auth-switch">Already have an account? <span id="show-login">Login here</span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const BACKEND_PORT = 5001;
+    const API_BASE = (window.location.port === String(BACKEND_PORT))
+        ? ''
+        : `http://${window.location.hostname || 'localhost'}:${BACKEND_PORT}`;
+
+    const loginSection = document.getElementById('login-section');
+    const registerSection = document.getElementById('register-section');
+    const showRegisterBtn = document.getElementById('show-register');
+    const showLoginBtn = document.getElementById('show-login');
+
+    // Toggle Views
+    showRegisterBtn.addEventListener('click', () => {
+        loginSection.style.display = 'none';
+        registerSection.style.display = 'block';
+    });
+
+    showLoginBtn.addEventListener('click', () => {
+        registerSection.style.display = 'none';
+        loginSection.style.display = 'block';
+    });
+
+    // Handle Registration Submit
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('reg-name').value;
+        const email = document.getElementById('reg-email').value;
+        const password = document.getElementById('reg-password').value;
+
+        try {
+            const response = await fetch(`${API_BASE}/api/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password })
+            });
+
+            let data = {};
+            try { data = await response.json(); } catch(err) {}
+
+            if (response.ok) {
+                alert(data.message || 'User registered successfully!');
+                registerSection.style.display = 'none';
+                loginSection.style.display = 'block';
+                document.getElementById('register-form').reset();
+            } else {
+                alert(data.message || `Registration failed (Status ${response.status})`);
+            }
+        } catch (error) {
+            console.error('Registration fetch error:', error);
+            alert(`Connection Error: Unable to connect to backend server at http://localhost:${BACKEND_PORT}. Make sure 'npm start' or 'node server.js' is running!`);
+        }
+    });
+
+    // Handle Login Submit
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+
+        try {
+            const response = await fetch(`${API_BASE}/api/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            let data = {};
+            try { data = await response.json(); } catch(err) {}
+            
+            if (response.ok) {
+                localStorage.setItem('user', JSON.stringify(data.user));
+                alert('Login successful!');
+                window.location.href = 'index.html';
+            } else {
+                alert(data.message || `Login failed (Status ${response.status})`);
+            }
+        } catch (error) {
+            console.error('Login fetch error:', error);
+            alert(`Connection Error: Unable to connect to backend server at http://localhost:${BACKEND_PORT}. Make sure 'npm start' or 'node server.js' is running!`);
+        }
+    });
+</script>
+
+</body>
+</html>

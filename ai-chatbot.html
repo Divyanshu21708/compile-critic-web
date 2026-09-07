@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompileCritic - AI Code Learning Platform</title>
+<link rel="icon" href="compilecritic-icon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="common-navbar.css">
+</head>
+<body>
+
+    <!-- YOUR ORIGINAL UNIFIED NAVBAR -->
+    <nav class="navbar">
+        <div class="logo" onclick="window.location.href='home.html'" style="cursor: pointer;">
+    <img src="compilecritic-logo.svg" alt="CompileCritic Logo" style="height: 65px; width: auto; display: block;">
+</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="index.html">Compiler</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+            <li><a href="ai-chatbot.html">AI Guide</a></li>
+            <li><a href="about.html">About</a></li>
+            
+            <li id="auth-nav-container">
+                <a href="login.html" class="login-nav-btn" id="login-link">Login / Register</a>
+                
+                <div class="user-profile" id="user-profile" style="display: none;">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <div class="dropdown-menu">
+                        <button onclick="window.location.href='history.html'" class="logout-btn" style="color: #E2E8F0; margin-bottom: 5px;">My History</button>
+                        <button id="logout-btn" class="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="navbar-space"></div>
+
+    <!-- CHATBOT PAGE CONTENT -->
+    <div class="page">
+        <!-- ROBOT -->
+        <div class="robot-container">
+            <div class="robot">
+                <div class="antenna"><div class="antenna-light"></div></div>
+                <div class="robot-head">
+                    <div class="robot-face">
+                        <div class="robot-eye left"></div>
+                        <div class="robot-eye right"></div>
+                        <div class="robot-smile"></div>
+                    </div>
+                </div>
+                <div class="robot-ear left-ear"></div>
+                <div class="robot-ear right-ear"></div>
+                <div class="robot-neck"></div>
+                <div class="robot-body">
+                    <div class="chest-panel">
+                        <div class="chat-icon">💬</div>
+                    </div>
+                </div>
+                <div class="robot-arm left-arm"></div>
+                <div class="robot-arm right-arm"></div>
+            </div>
+        </div>
+
+        <h1>Hi! I'm here to help you 😊</h1>
+        <p class="intro">Tell me what problem you're facing and I'll help you solve it.</p>
+
+        <!-- CHAT UI -->
+        <div class="chat-box">
+            <div class="messages" id="messages">
+                <div class="bot-message">
+                    <div class="message-robot">🤖</div>
+                    <div>
+                        <strong>AI Assistant</strong>
+                        <p>Hi! What would you like to ask me?<br>You can describe your coding problem or paste your code.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <textarea id="user-input" placeholder="Describe your coding problem..."></textarea>
+                <button id="send-button">➤</button>
+            </div>
+            <div class="input-hint">Press Enter to send • Shift + Enter for a new line</div>
+        </div>
+    </div>
+
+    <!-- JS to handle Navbar Auth State & Chatbot -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginLink = document.getElementById('login-link');
+            const userProfile = document.getElementById('user-profile');
+            const userAvatar = document.getElementById('user-avatar');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            const userData = localStorage.getItem('user');
+
+            if (userData) {
+                const user = JSON.parse(userData);
+                loginLink.style.display = 'none';
+                userProfile.style.display = 'flex';
+                if (user.name) {
+                    userAvatar.innerText = user.name.charAt(0).toUpperCase();
+                }
+            }
+
+            userProfile.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const dropdown = userProfile.querySelector('.dropdown-menu');
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            window.addEventListener('click', () => {
+                const dropdown = document.querySelector('.dropdown-menu');
+                if (dropdown) dropdown.style.display = 'none';
+            });
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('user');
+                    window.location.reload();
+                });
+            }
+        });
+    </script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

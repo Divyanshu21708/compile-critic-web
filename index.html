@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CompileCritic - AI Code Learning Platform</title>
+<link rel="icon" href="compilecritic-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Main Styles -->
+<link rel="stylesheet" href="style.css">
+<!-- AI Modal Styles -->
+<link rel="stylesheet" href="ai-modal.css">
+<link rel="stylesheet" href="common-navbar.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo" onclick="window.location.href='home.html'" style="cursor: pointer;">
+    <img src="compilecritic-logo.svg" alt="CompileCritic Logo" style="height: 65px; width: auto; display: block;">
+</div>
+    <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="index.html">Compiler</a></li>
+        <li><a href="ai-chatbot.html">AI Guide</a></li>
+        <li><a href="about.html">About</a></li>
+        
+        <!-- RESTORED: Dynamic Auth Container -->
+        <li id="auth-nav-container">
+            <a href="login.html" class="login-nav-btn" id="login-link">Login / Register</a>
+            
+            <div class="user-profile" id="user-profile" style="display: none; align-items: center; cursor: pointer; position: relative;">
+                <div class="user-avatar" id="user-avatar" style="width: 35px; height: 35px; background-color: #3B82F6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: white;">U</div>
+                <div class="dropdown-menu" style="display: none; position: absolute; right: 0; top: 45px; background-color: #1E293B; border: 1px solid #334155; border-radius: 8px; padding: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); min-width: 120px; z-index: 1000;">
+                    <button onclick="window.location.href='history.html'" class="logout-btn" style="background: none; border: none; color: #E2E8F0; width: 100%; text-align: left; padding: 6px; cursor: pointer; font-family: 'Poppins', sans-serif;">My History</button>
+                    <button id="logout-btn" class="logout-btn" style="background: none; border: none; color: #ef4444; width: 100%; text-align: left; padding: 6px; cursor: pointer; font-family: 'Poppins', sans-serif;">Logout</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<div class="navbar-space"></div>
+
+<main class="main-wrapper">
+  <section class="editor-section">
+    <div class="editor-column">
+      <div class="code-editor">
+        <div class="editor-top">
+          <div class="editor-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <select id="language-selector" class="language-dropdown">
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="javascript">JavaScript</option>
+          </select>
+        </div>
+
+        <div class="editor-body">
+          <div class="line-numbers">
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+          </div>
+          <pre class="code-area"><code id="code-input" contenteditable="true" spellcheck="false">#include &lt;stdio.h&gt;
+
+int main() {
+    printf("Hello World!\n");
+    return 0;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="custom-input-section">
+        <h3>Custom Input</h3>
+        <textarea class="custom-input-box" aria-label="Custom Input" placeholder="Enter your input here..."></textarea>
+      </div>
+
+      <div class="button-row">
+        <button type="button" class="action-btn run-btn">Run</button>
+        <button type="button" class="action-btn submit-btn">Submit</button>
+        <button type="button" class="action-btn ai-btn">AI Review</button>
+      </div>
+    </div>
+
+    <div class="output-column">
+      <div class="output-card">
+        <h3>Output</h3>
+        <pre class="output-text" style="font-family: inherit; white-space: pre-wrap;">Program output will appear here...</pre>
+      </div>
+      <div class="output-card">
+        <h3>Compilation Errors</h3>
+        <pre class="no-error-text" style="font-family: inherit; white-space: pre-wrap;">No errors</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-guide-section" id="ai-guide">
+    <h2 class="ai-guide-title">AI Guide</h2>
+    <div class="ai-guide-grid">
+      <div class="guide-card" style="cursor: pointer;">
+        <div class="guide-icon">⚠️</div>
+        <h4>Explain Error</h4>
+        <p>Understand what went wrong in your code</p>
+      </div>
+      <div class="guide-card" style="cursor: pointer;">
+        <div class="guide-icon">📖</div>
+        <h4>Explain Code</h4>
+        <p>Get a simple explanation of your logic</p>
+      </div>
+      <div class="guide-card" style="cursor: pointer;">
+        <div class="guide-icon">⚙️</div>
+        <h4>Optimize Code</h4>
+        <p>Make your code faster and cleaner</p>
+      </div>
+      <div class="guide-card" style="cursor: pointer;">
+        <div class="guide-icon">⏱️</div>
+        <h4>Time Complexity</h4>
+        <p>Analyze how your code scales with input</p>
+      </div>
+      <div class="guide-card" style="cursor: pointer;">
+        <div class="guide-icon">💾</div>
+        <h4>Space Complexity</h4>
+        <p>Check memory usage of your program</p>
+      </div>
+      <div class="guide-card" style="cursor: pointer;">
+        <div class="guide-icon">💡</div>
+        <h4>Suggestions</h4>
+        <p>Get tips to improve your code quality</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- AI MODAL POPUP WINDOW -->
+<div id="ai-modal" class="ai-modal-overlay" style="display: none;">
+    <div class="ai-modal-content">
+        <div class="ai-modal-header">
+            <h3 id="ai-modal-title">🤖 AI Assistant Analysis</h3>
+            <button id="close-ai-modal" class="close-modal-btn">&times;</button>
+        </div>
+        <div class="ai-modal-body">
+            <p id="ai-modal-text">Analyzing your code...</p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+const BACKEND_PORT = 5001;
+const API_BASE = (window.location.port === String(BACKEND_PORT))
+    ? ''
+    : `http://${window.location.hostname || 'localhost'}:${BACKEND_PORT}`;
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ==========================================
+    // 1. AUTHENTICATION & PROFILE LOGIC
+    // ==========================================
+    const loginLink = document.getElementById('login-link');
+    const userProfile = document.getElementById('user-profile');
+    const userAvatar = document.getElementById('user-avatar');
+    const logoutBtn = document.getElementById('logout-btn');
+    const userData = localStorage.getItem('user');
+
+    if (userData) {
+        const user = JSON.parse(userData);
+        if (loginLink) loginLink.style.display = 'none';
+        if (userProfile) userProfile.style.display = 'flex';
+        if (user.name && userAvatar) {
+            userAvatar.innerText = user.name.charAt(0).toUpperCase();
+        }
+    }
+
+    if (userProfile) {
+        userProfile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const dropdown = userProfile.querySelector('.dropdown-menu');
+            if (dropdown) dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+    }
+
+    window.addEventListener('click', () => {
+        const dropdown = document.querySelector('.dropdown-menu');
+        if (dropdown) dropdown.style.display = 'none';
+    });
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('user');
+            window.location.reload();
+        });
+    }
+
+    // ==========================================
+    // 2. COMPILER & EDITOR LOGIC
+    // ==========================================
+    const codeInput = document.getElementById('code-input');
+    const langSelector = document.getElementById('language-selector');
+    const customInput = document.querySelector('.custom-input-box');
+    const outputText = document.querySelector('.output-text');
+    const errorText = document.querySelector('.no-error-text');
+    const runBtn = document.querySelector('.run-btn');
+    const submitBtn = document.querySelector('.submit-btn');
+
+    if (langSelector && codeInput) {
+        langSelector.addEventListener("change", function () {
+            const language = langSelector.value;
+            if (language === "c") codeInput.innerText = `#include <stdio.h>\n\nint main() {\n    printf("Hello World!\\n");\n    return 0;\n}`;
+            else if (language === "cpp") codeInput.innerText = `#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello World!" << endl;\n    return 0;\n}`;
+            else if (language === "python") codeInput.innerText = `print("Hello World!")`;
+            else if (language === "java") codeInput.innerText = `public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello World!");\n    }\n}`;
+            else if (language === "javascript") codeInput.innerText = `console.log("Hello World!");`;
+        });
+    }
+
+    // Check if snippet payload was passed from history page
+    const snippetToLoad = localStorage.getItem('loadSnippet');
+    if (snippetToLoad) {
+        try {
+            const data = JSON.parse(snippetToLoad);
+            if (data.language && langSelector) langSelector.value = data.language;
+            if (data.code && codeInput) codeInput.textContent = data.code;
+            if (data.customInput !== undefined && customInput) customInput.value = data.customInput;
+            localStorage.removeItem('loadSnippet');
+        } catch (e) {}
+    }
+
+    if (runBtn) {
+        runBtn.addEventListener('click', async () => {
+            const rawCode = codeInput.innerText || codeInput.textContent || "";
+            const code = rawCode.replace(/\u00A0/g, ' ').trim();
+            const language = langSelector ? langSelector.value : "c";
+            const inputVal = customInput ? customInput.value : "";
+
+            if (!code) {
+                outputText.textContent = "";
+                errorText.textContent = "Please enter some code before running.";
+                errorText.style.color = "#ef4444";
+                return;
+            }
+
+            runBtn.disabled = true;
+            const originalBtnText = runBtn.textContent;
+            runBtn.textContent = "Running...";
+
+            outputText.textContent = "Compiling and running your code...";
+            outputText.style.color = "#E2E8F0";
+            errorText.textContent = "No errors";
+            errorText.style.color = "#22c55e";
+
+            try {
+                const response = await fetch(`${API_BASE}/api/compile`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ language, code, customInput: inputVal })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (data.output && data.output.trim()) {
+                        outputText.textContent = data.output;
+                        outputText.style.color = "#E2E8F0";
+                    } else {
+                        outputText.textContent = data.error ? "" : "(No output produced)";
+                        outputText.style.color = "#E2E8F0";
+                    }
+
+                    if (data.error && data.error.trim()) {
+                        errorText.textContent = data.error.trim();
+                        errorText.style.color = "#ef4444";
+                    } else {
+                        errorText.textContent = "No errors";
+                        errorText.style.color = "#22c55e";
+                    }
+                } else {
+                    outputText.textContent = "";
+                    errorText.textContent = data.error || data.message || "Failed to execute code.";
+                    errorText.style.color = "#ef4444";
+                }
+            } catch (err) {
+                console.error("Run error:", err);
+                outputText.textContent = "";
+                errorText.textContent = "Connection Error: Unable to reach code execution server. Ensure backend is running.";
+                errorText.style.color = "#ef4444";
+            } finally {
+                runBtn.disabled = false;
+                runBtn.textContent = originalBtnText || "Run";
+            }
+        });
+    } 
+    if (submitBtn) {
+        submitBtn.addEventListener('click', async () => {
+            if (!userData) {
+                alert('You must be logged in to save code!');
+                window.location.href = 'login.html';
+                return;
+            }
+            const user = JSON.parse(userData);
+            const code = codeInput.innerText.trim();
+            const language = langSelector.value;
+            const input = customInput.value;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/snippets/save`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: user.id, language, code, customInput: input })
+                });
+                const result = await response.json();
+                alert(result.message);
+            } catch (error) {
+                alert('Connection error. Ensure your server is running.');
+            }
+        });
+    }
+
+    // ==========================================
+    // 3. AI MODAL POPUP LOGIC
+    // ==========================================
+    const guideCards = document.querySelectorAll('.guide-card');
+    const mainAiBtn = document.querySelector('.ai-btn');
+    const aiModal = document.getElementById('ai-modal');
+    const modalTitle = document.getElementById('ai-modal-title');
+    const modalText = document.getElementById('ai-modal-text');
+    const closeModalBtn = document.getElementById('close-ai-modal');
+
+    closeModalBtn.addEventListener('click', () => aiModal.style.display = 'none');
+    window.addEventListener('click', (e) => {
+        if (e.target === aiModal) aiModal.style.display = 'none';
+    });
+
+    async function askAI(taskDescription) {
+        const code = codeInput.innerText.trim();
+        if (!code) {
+            alert("Please write or paste some code in the editor first!");
+            return;
+        }
+
+        modalTitle.textContent = `🤖 AI Analysis: ${taskDescription}`;
+        modalText.textContent = "Analyzing your code, please wait...";
+        aiModal.style.display = 'flex';
+
+        let promptMessage = `Task: ${taskDescription}\n\nCode:\n${code}`;
+        const errContent = errorText ? errorText.textContent.trim() : "";
+        if (taskDescription.toLowerCase().includes("error") && errContent && errContent !== "No errors") {
+            promptMessage += `\n\nCompiler Error Details:\n${errContent}`;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE}/api/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: promptMessage })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Convert raw Markdown symbols into beautifully formatted HTML
+let formattedText = data.reply
+    .replace(/</g, "&lt;").replace(/>/g, "&gt;") // Security check
+    .replace(/```[\s\S]*?```/g, match => `<pre style="background:#0F172A; padding:12px; border-radius:8px; margin:10px 0; overflow-x:auto; border: 1px solid #334155;"><code>${match.replace(/`/g, '')}</code></pre>`)
+    .replace(/`([^`]+)`/g, '<code style="background:#0F172A; padding:2px 6px; border-radius:4px; color:#3B82F6;">$1</code>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong style="color: white;">$1</strong>')
+    .replace(/\n?### (.*)/g, '<br><h4 style="color:#3B82F6; margin-top:10px; margin-bottom:5px;">$1</h4>')
+    .replace(/\n?## (.*)/g, '<br><h3 style="color:#3B82F6; margin-top:15px; margin-bottom:5px;">$1</h3>')
+    .replace(/\n?# (.*)/g, '<br><h2 style="color:#3B82F6; margin-top:15px; margin-bottom:5px;">$1</h2>')
+    .replace(/\n\* (.*)/g, '<br>&bull; $1')
+    .replace(/\n- (.*)/g, '<br>&bull; $1')
+    .replace(/\n/g, '<br>');
+
+// Use innerHTML so the browser renders the styling instead of raw text
+modalText.innerHTML = formattedText;
+            } else {
+                modalText.textContent = "AI Error: " + (data.error || "Something went wrong.");
+            }
+        } catch (error) {
+            modalText.textContent = "Connection Error: Ensure your Node server is running on http://localhost:5001.";
+        }
+    }
+
+    guideCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const task = card.querySelector('h4').innerText; 
+            askAI(task);
+        });
+    });
+
+    if (mainAiBtn) {
+        mainAiBtn.addEventListener('click', () => askAI("General Code Review"));
+    }
+});
+</script>
+
+</body>
+</html>

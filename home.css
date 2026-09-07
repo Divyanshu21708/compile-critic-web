@@ -1,0 +1,107 @@
+/* --- HOME PAGE SPECIFIC STYLES --- */
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 52px;
+  font-weight: 700;
+  color: #E2E8F0;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.hero-title span {
+  color: #3B82F6; /* Matches your brand blue */
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: #94A3B8;
+  margin-bottom: 40px;
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.hero-btn {
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.primary-btn {
+  background-color: #3B82F6;
+  color: white;
+}
+
+.secondary-btn {
+  background-color: #334155;
+  color: white;
+  border: 1px solid #475569;
+}
+
+.hero-btn:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+/* Features Grid */
+.features-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 80px 20px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feature-card {
+  background-color: #1E293B;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 30px;
+  flex: 1 1 300px;
+  max-width: 350px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+}
+
+.feature-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #E2E8F0;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: #94A3B8;
+  line-height: 1.6;
+}

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CompileCritic - AI Code Learning Platform</title>
+<link rel="icon" href="compilecritic-icon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="quiz.css">
+    <link rel="stylesheet" href="common-navbar.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+   <div class="logo" onclick="window.location.href='home.html'" style="cursor: pointer;">
+    <img src="compilecritic-logo.svg" alt="CompileCritic Logo" style="height: 65px; width: auto; display: block;">
+</div>
+    <ul class="nav-links">
+
+        <li><a href="home.html">Home</a></li>
+        <li><a href="index.html">Compiler</a></li>
+        <li><a href="ai-chatbot.html">AI Guide</a></li>
+        <li><a href="quiz.html" class="active">Quiz</a></li>
+        <li><a href="about.html">About</a></li>
+
+    </ul>
+
+</nav>
+
+<div class="navbar-space"></div>
+
+
+<!-- QUIZ START SCREEN -->
+
+<section id="start-screen" class="screen">
+
+    <div class="quiz-card">
+
+        <div class="robot">
+            🤖
+        </div>
+
+        <h1>
+            Coding Quiz
+        </h1>
+
+        <p>
+            Test your programming knowledge
+            and improve your coding skills.
+        </p>
+
+        <!-- STEP 1: LANGUAGE -->
+        <h2>
+            1. Choose a Programming Language
+        </h2>
+
+        <div class="language-options option-group" id="language-options">
+
+            <button onclick="selectLanguage('C')">
+                C
+            </button>
+
+            <button onclick="selectLanguage('Java')">
+                Java
+            </button>
+
+            <button onclick="selectLanguage('Python')">
+                Python
+            </button>
+
+            <button onclick="selectLanguage('JavaScript')">
+                JavaScript
+            </button>
+
+        </div>
+
+        <!-- STEP 2: NUMBER OF QUESTIONS -->
+        <h2>
+            2. Number of Questions
+        </h2>
+
+        <div class="count-options option-group" id="count-options">
+
+            <button onclick="selectQuestionCount(5)">
+                5
+            </button>
+
+            <button onclick="selectQuestionCount(10)">
+                10
+            </button>
+
+            <button onclick="selectQuestionCount(15)">
+                15
+            </button>
+
+            <button onclick="selectQuestionCount(20)">
+                20
+            </button>
+
+        </div>
+
+        <!-- STEP 3: DIFFICULTY -->
+        <h2>
+            3. Choose Difficulty
+        </h2>
+
+        <div class="difficulty-options option-group" id="difficulty-options">
+
+            <button onclick="selectDifficulty('Easy')">
+                Easy
+            </button>
+
+            <button onclick="selectDifficulty('Medium')">
+                Medium
+            </button>
+
+            <button onclick="selectDifficulty('Difficult')">
+                Difficult
+            </button>
+
+        </div>
+
+        <!-- WARNING NOTICE FOR INSUFFICIENT QUESTIONS -->
+        <div id="quiz-warning" class="warning-msg hidden"></div>
+
+        <!-- STEP 4: START QUIZ BUTTON -->
+        <button
+            id="start-button"
+            class="start-button"
+            onclick="startQuiz()"
+            disabled>
+
+            Start Quiz
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- QUIZ SCREEN -->
+
+<section id="quiz-screen" class="screen hidden">
+
+    <div class="quiz-container">
+
+        <div class="quiz-top">
+
+            <span id="language-name">
+                Python (Easy)
+            </span>
+
+            <span id="question-number">
+                Question 1 / 5
+            </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div id="progress"></div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <h2 id="question">
+                Question goes here
+            </h2>
+
+
+            <div id="answers" class="answers">
+
+            </div>
+
+
+            <button
+                id="next-button"
+                onclick="nextQuestion()"
+                disabled>
+
+                Next
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- RESULT SCREEN -->
+
+<section id="result-screen" class="screen hidden">
+
+    <div class="result-card">
+
+        <div class="robot">
+            🤖
+        </div>
+
+        <h1>
+            Quiz Completed!
+        </h1>
+
+        <p>
+            Your Score
+        </p>
+
+        <div id="score">
+            0 / 5
+        </div>
+
+        <div class="result-stats">
+            <div class="stat-box correct-box">
+                <span class="stat-label">Correct</span>
+                <span id="correct-count" class="stat-value">0</span>
+            </div>
+            <div class="stat-box wrong-box">
+                <span class="stat-label">Wrong</span>
+                <span id="wrong-count" class="stat-value">0</span>
+            </div>
+            <div class="stat-box percent-box">
+                <span class="stat-label">Accuracy</span>
+                <span id="percentage-score" class="stat-value">0%</span>
+            </div>
+        </div>
+
+        <p id="result-message">
+            Good job!
+        </p>
+        <p id="result-message">
+            Good job!
+        </p>
+
+        <!-- NEW: Quiz Review Breakdown Container -->
+        <div id="quiz-review" class="quiz-review-container"></div>
+
+        <div class="result-buttons">
+
+        <div class="result-buttons">
+            <button
+                class="start-button"
+                onclick="retakeQuiz()">
+
+                Retake Quiz
+
+            </button>
+
+            <button
+                class="secondary-button"
+                onclick="newQuiz()">
+
+                New Quiz
+
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Include the massive question bank first, then the logic script -->
+<script src="quizQuestions.js"></script>
+<script src="quiz.js"></script>
+
+</body>
+
+</html>

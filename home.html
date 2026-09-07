@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompileCritic - AI Code Learning Platform</title>
+<link rel="icon" href="compilecritic-icon.svg" type="image/svg+xml">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Link to global styling & navbar -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Link to redesigned home styles -->
+    <link rel="stylesheet" href="homecss.css">
+    <link rel="stylesheet" href="common-navbar.css">
+</head>
+<body>
+
+    <!-- UNIFIED NAVBAR -->
+    <nav class="navbar">
+        <div class="logo" onclick="window.location.href='home.html'" style="cursor: pointer;">
+    <img src="compilecritic-logo.svg" alt="CompileCritic Logo" style="height: 65px; width: auto; display: block;">
+</div>
+        <ul class="nav-links">
+            <li><a href="home.html" class="active">Home</a></li>
+            <li><a href="#learn">Learn</a></li>
+            <li><a href="index.html">Compiler</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+            <li><a href="ai-chatbot.html">AI Guide</a></li>
+            <li><a href="about.html">About</a></li>
+            
+            <li id="auth-nav-container">
+                <a href="login.html" class="login-nav-btn" id="login-link">Login / Register</a>
+                
+                <div class="user-profile" id="user-profile" style="display: none;">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <div class="dropdown-menu">
+                        <button onclick="window.location.href='history.html'" class="logout-btn" style="color: #E2E8F0; margin-bottom: 5px;">My History</button>
+                        <button id="logout-btn" class="logout-btn">Logout</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="navbar-space"></div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="platform-badge">
+            <span class="badge-icon">🎓</span>
+            <span>AI-Powered Coding Learning Platform</span>
+        </div>
+
+        <h1>Learn. Practice. Code. <span>Master.</span></h1>
+        <p class="subtitle">An AI-powered coding learning platform to learn programming, practice DSA, solve coding problems, run your code, and improve with intelligent feedback.</p>
+
+        <div class="hero-buttons">
+            <a href="index.html" class="primary-button">
+                <span>💻 Start Coding</span>
+            </a>
+            <a href="quiz.html" class="secondary-button">
+                <span>🧩 Take a Quiz</span>
+            </a>
+        </div>
+
+        <!-- CONNECTED LEARNING NETWORK VISUAL -->
+        <div class="tools-area">
+            <div class="connection-lines">
+                <div class="line line-left-1"></div>
+                <div class="line line-left-2"></div>
+                <div class="line line-left-3"></div>
+                <div class="line line-left-4"></div>
+                <div class="line line-right-1"></div>
+                <div class="line line-right-2"></div>
+                <div class="line line-right-3"></div>
+                <div class="line line-right-4"></div>
+            </div>
+
+            <div class="tool tool-left-1"><div class="tool-icon blue-tool">DSA</div></div>
+            <div class="tool tool-left-2"><div class="tool-icon green-tool">C++</div></div>
+            <div class="tool tool-left-3"><div class="tool-icon purple-tool">JS</div></div>
+            <div class="tool tool-left-4"><div class="tool-icon dark-tool">PY</div></div>
+
+            <div class="center-tool">
+                <div class="center-icon">🎓</div>
+                <span>LEARNING HUB</span>
+            </div>
+
+            <div class="tool tool-right-1"><div class="tool-icon green-tool">QUIZ</div></div>
+            <div class="tool tool-right-2"><div class="tool-icon blue-tool">AI</div></div>
+            <div class="tool tool-right-3"><div class="tool-icon purple-tool">JAVA</div></div>
+            <div class="tool tool-right-4"><div class="tool-icon dark-tool">&lt;/&gt;</div></div>
+        </div>
+    </section>
+
+    <!-- SECTION 1: QUICK ACTIONS (START LEARNING) -->
+    <section class="section-container quick-actions-section">
+        <div class="section-header text-center">
+            <span class="section-badge">START LEARNING</span>
+            <h2>Start Learning</h2>
+            <p>Jump into coding, quizzes, AI guidance, and reviews whenever you are ready.</p>
+        </div>
+
+        <div class="quick-actions-grid">
+            <div class="quick-action-card">
+                <div class="action-icon">💻</div>
+                <h3>Compiler</h3>
+                <p>Write and run your code in real-time across multiple programming languages.</p>
+                <a href="index.html" class="card-btn">Start Coding</a>
+            </div>
+
+            <div class="quick-action-card highlight-card">
+                <div class="action-icon">🧩</div>
+                <h3>Coding Quiz</h3>
+                <p>Test your programming knowledge with customizable language and difficulty quizzes.</p>
+                <a href="quiz.html" class="card-btn primary-card-btn">Take Quiz</a>
+            </div>
+
+            <div class="quick-action-card">
+                <div class="action-icon">🤖</div>
+                <h3>AI Guide</h3>
+                <p>Ask coding questions and learn computer science concepts interactively with AI.</p>
+                <a href="ai-chatbot.html" class="card-btn">Ask AI</a>
+            </div>
+
+            <div class="quick-action-card">
+                <div class="action-icon">🔍</div>
+                <h3>Code Review</h3>
+                <p>Get intelligent automated feedback, complexity analysis, and optimization tips.</p>
+                <a href="index.html" class="card-btn">Review Code</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: LEARNING PLAYLISTS (LEARN PROGRAMMING) -->
+    <section id="learn" class="section-container playlists-section">
+        <div class="section-header text-center">
+            <span class="section-badge">LEARN PROGRAMMING</span>
+            <h2>Learn Programming</h2>
+            <p>Explore curated learning resources for programming and DSA.</p>
+        </div>
+
+        <div class="playlists-grid">
+            <!-- DSA -->
+            <div class="playlist-card">
+                <div class="card-top">
+                    <span class="card-num">01</span>
+                    <span class="card-tag">ALGORITHMS</span>
+                </div>
+                <h3>Top DSA Playlists</h3>
+                <p>Master Data Structures and Algorithms from fundamentals to advanced problem solving.</p>
+                <div class="topic-chips">
+                    <span>Arrays</span>
+                    <span>Linked Lists</span>
+                    <span>Trees</span>
+                    <span>Graphs</span>
+                    <span>DP</span>
+                </div>
+                <h4 class="resource-heading">Top 5 YouTube Playlists</h4>
+                <div class="resource-list">
+                    <a class="resource-item" href="https://www.youtube.com/playlist?list=PLgUwDviBIf0oF6QL8m22w1hIDC1vJ_BHz" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/0bHoB32fuj0/hqdefault.jpg" alt="Striver DSA Playlist thumbnail">
+                        <span class="resource-copy"><strong>Striver DSA Playlist</strong><small>Complete DSA preparation</small><em>Watch Playlist &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/playlist?list=PLDzeHZWIZsTryvtXdMr6rPh4IDexB5NIA" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/WQoB2z67hvY/hqdefault.jpg" alt="CodeHelp DSA playlist thumbnail">
+                        <span class="resource-copy"><strong>CodeHelp DSA Course</strong><small>Placement-focused problem solving</small><em>Watch Playlist &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/playlist?list=PLqM7alHXFySF7JxK9E24C-ZeNAXFB1u8k" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/8hly31xKli0/hqdefault.jpg" alt="GeeksforGeeks DSA playlist thumbnail">
+                        <span class="resource-copy"><strong>GeeksforGeeks DSA</strong><small>Algorithms from basics to advanced</small><em>Watch Playlist &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/playlist?list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/rZ41y93P2Qo/hqdefault.jpg" alt="Apna College DSA playlist thumbnail">
+                        <span class="resource-copy"><strong>Apna College DSA</strong><small>Concepts, patterns, and practice</small><em>Watch Playlist &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@freecodecamp/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/A74TOX803D0/hqdefault.jpg" alt="freeCodeCamp algorithms playlist thumbnail">
+                        <span class="resource-copy"><strong>freeCodeCamp Algorithms</strong><small>Long-form computer science courses</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                </div>
+                <a href="https://www.geeksforgeeks.org/data-structures/" target="_blank" rel="noopener noreferrer" class="playlist-btn">
+                    <span>Explore DSA</span> ↗
+                </a>
+            </div>
+
+            <!-- C++ -->
+            <div class="playlist-card">
+                <div class="card-top">
+                    <span class="card-num">02</span>
+                    <span class="card-tag">C++</span>
+                </div>
+                <h3>C++ Learning</h3>
+                <p>Learn C++ from basics to advanced programming and competitive coding.</p>
+                <div class="topic-chips">
+                    <span>Basics</span>
+                    <span>OOP</span>
+                    <span>STL</span>
+                    <span>DSA</span>
+                </div>
+                <h4 class="resource-heading">Top 5 C++ Learning Playlists</h4>
+                <div class="resource-list">
+                    <a class="resource-item" href="https://www.youtube.com/@CodeWithHarry/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/vLnPwxZdW4Y/hqdefault.jpg" alt="CodeWithHarry C++ learning thumbnail">
+                        <span class="resource-copy"><strong>CodeWithHarry C++</strong><small>C++ basics and programming practice</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@ApnaCollegeOfficial/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/vLnPwxZdW4Y/hqdefault.jpg" alt="Apna College C++ learning thumbnail">
+                        <span class="resource-copy"><strong>Apna College C++</strong><small>Core concepts and problem solving</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@freecodecamp/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/vLnPwxZdW4Y/hqdefault.jpg" alt="freeCodeCamp C++ learning thumbnail">
+                        <span class="resource-copy"><strong>freeCodeCamp C++</strong><small>Long-form C++ courses</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@Telusko/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/vLnPwxZdW4Y/hqdefault.jpg" alt="Telusko C++ learning thumbnail">
+                        <span class="resource-copy"><strong>Telusko C++</strong><small>Practical language fundamentals</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@GeeksforGeeksVideos/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/vLnPwxZdW4Y/hqdefault.jpg" alt="GeeksforGeeks C++ learning thumbnail">
+                        <span class="resource-copy"><strong>GeeksforGeeks C++</strong><small>STL, OOP, and competitive coding</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                </div>
+                <a href="https://www.geeksforgeeks.org/c-plus-plus/" target="_blank" rel="noopener noreferrer" class="playlist-btn">
+                    <span>Learn C++</span> ↗
+                </a>
+            </div>
+
+            <!-- Python -->
+            <div class="playlist-card">
+                <div class="card-top">
+                    <span class="card-num">03</span>
+                    <span class="card-tag">PYTHON</span>
+                </div>
+                <h3>Python Learning</h3>
+                <p>Build a strong Python foundation and progress toward advanced programming.</p>
+                <div class="topic-chips">
+                    <span>Syntax</span>
+                    <span>Functions</span>
+                    <span>OOP</span>
+                    <span>Libraries</span>
+                </div>
+                <h4 class="resource-heading">Top 5 Python Learning Playlists</h4>
+                <div class="resource-list">
+                    <a class="resource-item" href="https://www.youtube.com/@CodeWithHarry/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/rfscVS0vtbw/hqdefault.jpg" alt="CodeWithHarry Python learning thumbnail">
+                        <span class="resource-copy"><strong>CodeWithHarry Python</strong><small>Python from basics to projects</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@ApnaCollegeOfficial/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/rfscVS0vtbw/hqdefault.jpg" alt="Apna College Python learning thumbnail">
+                        <span class="resource-copy"><strong>Apna College Python</strong><small>Beginner-friendly programming lessons</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@freecodecamp/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/rfscVS0vtbw/hqdefault.jpg" alt="freeCodeCamp Python learning thumbnail">
+                        <span class="resource-copy"><strong>freeCodeCamp Python</strong><small>Complete Python courses</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@Telusko/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/rfscVS0vtbw/hqdefault.jpg" alt="Telusko Python learning thumbnail">
+                        <span class="resource-copy"><strong>Telusko Python</strong><small>Clear, practical Python tutorials</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@GeeksforGeeksVideos/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/rfscVS0vtbw/hqdefault.jpg" alt="GeeksforGeeks Python learning thumbnail">
+                        <span class="resource-copy"><strong>GeeksforGeeks Python</strong><small>Syntax, OOP, and libraries</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                </div>
+                <a href="https://docs.python.org/3/tutorial/" target="_blank" rel="noopener noreferrer" class="playlist-btn">
+                    <span>Learn Python</span> ↗
+                </a>
+            </div>
+
+            <!-- Java -->
+            <div class="playlist-card">
+                <div class="card-top">
+                    <span class="card-num">04</span>
+                    <span class="card-tag">JAVA</span>
+                </div>
+                <h3>Java Learning</h3>
+                <p>Learn Java programming, object-oriented concepts and problem solving.</p>
+                <div class="topic-chips">
+                    <span>Basics</span>
+                    <span>OOP</span>
+                    <span>Collections</span>
+                    <span>DSA</span>
+                </div>
+                <h4 class="resource-heading">Top 5 Java Learning Playlists</h4>
+                <div class="resource-list">
+                    <a class="resource-item" href="https://www.youtube.com/playlist?list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/bm0OyhwFDuY/hqdefault.jpg" alt="Telusko Java playlist thumbnail">
+                        <span class="resource-copy"><strong>Telusko Java Tutorial</strong><small>Java fundamentals for beginners</small><em>Watch Playlist &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@CodeWithHarry/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/LBqE4YOvhyc/hqdefault.jpg" alt="CodeWithHarry Java learning thumbnail">
+                        <span class="resource-copy"><strong>CodeWithHarry Java</strong><small>Beginner-friendly Java lessons</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@ApnaCollegeOfficial/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/A74TOX803D0/hqdefault.jpg" alt="Apna College Java learning thumbnail">
+                        <span class="resource-copy"><strong>Apna College Java</strong><small>Core Java and interview preparation</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@GeeksforGeeksVideos/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/A74TOX803D0/hqdefault.jpg" alt="GeeksforGeeks Java learning thumbnail">
+                        <span class="resource-copy"><strong>GeeksforGeeks Java</strong><small>Java programming and problem solving</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@freecodecamp/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/A74TOX803D0/hqdefault.jpg" alt="freeCodeCamp Java learning thumbnail">
+                        <span class="resource-copy"><strong>freeCodeCamp Java</strong><small>Long-form Java programming courses</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                </div>
+                <a href="https://dev.java/learn/" target="_blank" rel="noopener noreferrer" class="playlist-btn">
+                    <span>Learn Java</span> ↗
+                </a>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="playlist-card">
+                <div class="card-top">
+                    <span class="card-num">05</span>
+                    <span class="card-tag">JAVASCRIPT</span>
+                </div>
+                <h3>JavaScript Learning</h3>
+                <p>Learn modern JavaScript for programming and web development.</p>
+                <div class="topic-chips">
+                    <span>ES6+</span>
+                    <span>DOM</span>
+                    <span>Functions</span>
+                    <span>Async</span>
+                </div>
+                <h4 class="resource-heading">Top 5 JavaScript Learning Playlists</h4>
+                <div class="resource-list">
+                    <a class="resource-item" href="https://www.youtube.com/@CodeWithHarry/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/PkZNo7MFNFg/hqdefault.jpg" alt="CodeWithHarry JavaScript learning thumbnail">
+                        <span class="resource-copy"><strong>CodeWithHarry JavaScript</strong><small>Modern JavaScript fundamentals</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@ApnaCollegeOfficial/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/PkZNo7MFNFg/hqdefault.jpg" alt="Apna College JavaScript learning thumbnail">
+                        <span class="resource-copy"><strong>Apna College JavaScript</strong><small>Web scripting and DOM basics</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@freecodecamp/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/PkZNo7MFNFg/hqdefault.jpg" alt="freeCodeCamp JavaScript learning thumbnail">
+                        <span class="resource-copy"><strong>freeCodeCamp JavaScript</strong><small>Complete JavaScript courses</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@TraversyMedia/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/hdI2bqOjy3c/hqdefault.jpg" alt="Traversy Media JavaScript learning thumbnail">
+                        <span class="resource-copy"><strong>Traversy Media JavaScript</strong><small>Projects and practical web development</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                    <a class="resource-item" href="https://www.youtube.com/@javascriptmastery/playlists" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ytimg.com/vi/1WmNXEVia8I/hqdefault.jpg" alt="JavaScript Mastery learning thumbnail">
+                        <span class="resource-copy"><strong>JavaScript Mastery</strong><small>Modern frontend development</small><em>View Playlists &rarr;</em></span>
+                    </a>
+                </div>
+                <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript" target="_blank" rel="noopener noreferrer" class="playlist-btn">
+                    <span>Learn JavaScript</span> ↗
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PRACTICE & IMPROVE -->
+    <section class="section-container practice-section">
+        <div class="section-header text-center">
+            <span class="section-badge">WORKFLOW</span>
+            <h2>Practice. Get Better.</h2>
+            <p>Connect learning, hands-on practice, and AI feedback in one seamless loop.</p>
+        </div>
+
+        <div class="practice-steps-grid">
+            <div class="step-card">
+                <div class="step-badge">STEP 01</div>
+                <h3>CODE</h3>
+                <p>Write and run programs using our integrated multi-language code compiler.</p>
+                <a href="index.html" class="step-link">Open Compiler →</a>
+            </div>
+
+            <div class="step-card">
+                <div class="step-badge">STEP 02</div>
+                <h3>QUIZ</h3>
+                <p>Test your programming knowledge with customizable language & difficulty quizzes.</p>
+                <a href="quiz.html" class="step-link">Start Quiz →</a>
+            </div>
+
+            <div class="step-card">
+                <div class="step-badge">STEP 03</div>
+                <h3>AI</h3>
+                <p>Understand compiler errors and improve your code logic using AI guidance.</p>
+                <a href="ai-chatbot.html" class="step-link">Ask AI Guide →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: QUIZ PROMOTION BANNER -->
+    <section class="section-container quiz-promo-section">
+        <div class="quiz-promo-banner">
+            <div class="promo-content">
+                <span class="promo-badge">INTERACTIVE QUIZZES</span>
+                <h2>Test Your Coding Skills</h2>
+                <p>Choose your programming language, difficulty level, and number of questions — then challenge yourself with our dynamic quiz engine.</p>
+                <div class="promo-languages">
+                    <span>C</span>
+                    <span>Java</span>
+                    <span>Python</span>
+                    <span>JavaScript</span>
+                </div>
+                <a href="quiz.html" class="primary-button promo-btn">
+                    <span>🧩 Start Quiz Now</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: LEARN SMARTER WITH AI -->
+    <section class="section-container ai-features-section">
+        <div class="section-header text-center">
+            <span class="section-badge">INTELLIGENT ASSISTANCE</span>
+            <h2>Learn Smarter with AI</h2>
+            <p>AI features supporting your learning journey every step of the way.</p>
+        </div>
+
+        <div class="ai-features-grid">
+            <div class="ai-feature-card">
+                <div class="ai-icon">🔍</div>
+                <h3>AI Code Review</h3>
+                <p>Get suggestions and code quality improvements automatically.</p>
+                <a href="index.html" class="ai-card-link">Review Code</a>
+            </div>
+
+            <div class="ai-feature-card">
+                <div class="ai-icon">⚠️</div>
+                <h3>Error Explanation</h3>
+                <p>Understand why your code failed instead of simply fixing syntax errors blindly.</p>
+                <a href="index.html" class="ai-card-link">Explain Error</a>
+            </div>
+
+            <div class="ai-feature-card">
+                <div class="ai-icon">💬</div>
+                <h3>AI Guide</h3>
+                <p>Ask coding questions and learn complex computer science concepts interactively.</p>
+                <a href="ai-chatbot.html" class="ai-card-link">Ask AI Assistant</a>
+            </div>
+
+            <div class="ai-feature-card">
+                <div class="ai-icon">⏱️</div>
+                <h3>Complexity Analysis</h3>
+                <p>Understand the time and space complexity of your algorithms easily.</p>
+                <a href="index.html" class="ai-card-link">Analyze Complexity</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">
+            <div class="logo-icon">🎓</div>
+            CompileCritic
+        </div>
+        <p>Learn programming • Practice DSA • Code smarter with AI</p>
+        <div class="footer-links">
+            <a href="home.html">Home</a>
+            <a href="#learn">Learn</a>
+            <a href="index.html">Compiler</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="ai-chatbot.html">AI Guide</a>
+            <a href="about.html">About</a>
+        </div>
+        <div class="copyright">© 2026 CompileCritic</div>
+    </footer>
+
+    <!-- JS to handle Navbar Auth State -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginLink = document.getElementById('login-link');
+            const userProfile = document.getElementById('user-profile');
+            const userAvatar = document.getElementById('user-avatar');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            const userData = localStorage.getItem('user');
+
+            if (userData) {
+                const user = JSON.parse(userData);
+                if (loginLink) loginLink.style.display = 'none';
+                if (userProfile) userProfile.style.display = 'flex';
+                if (user.name && userAvatar) {
+                    userAvatar.innerText = user.name.charAt(0).toUpperCase();
+                }
+            }
+
+            if (userProfile) {
+                userProfile.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const dropdown = userProfile.querySelector('.dropdown-menu');
+                    if (dropdown) dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+
+            window.addEventListener('click', () => {
+                const dropdown = document.querySelector('.dropdown-menu');
+                if (dropdown) dropdown.style.display = 'none';
+            });
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    localStorage.removeItem('user');
+                    window.location.reload();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
