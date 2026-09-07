@@ -44,10 +44,7 @@
 
 <script>
     const BACKEND_PORT = 5001;
-    const API_BASE = (window.location.port === String(BACKEND_PORT))
-        ? ''
-        : `http://${window.location.hostname || 'localhost'}:${BACKEND_PORT}`;
-
+    const API_BASE = "";
     document.addEventListener('DOMContentLoaded', async () => {
         const historyGrid = document.getElementById('history-grid');
         const userAvatar = document.getElementById('user-avatar');

@@ -3,11 +3,7 @@ const sendButton = document.getElementById("send-button");
 const messages = document.getElementById("messages");
 
 // Dynamic API Routing
-const BACKEND_PORT = 5001;
-const API_BASE = (window.location.port === String(BACKEND_PORT))
-    ? ''
-    : `http://${window.location.hostname || 'localhost'}:${BACKEND_PORT}`;
-
+const API_BASE = "";
 async function sendMessage() {
     const text = input.value.trim();
     if (text === "") return;
