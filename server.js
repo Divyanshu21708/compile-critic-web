@@ -16,7 +16,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 // Middleware
 app.use(express.json());
 app.use(cors());
-app.use(express.static(__dirname)); 
+app.use(express.static(__dirname, { index: 'home.html' }));
 
 // Connect to MongoDB
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/code_reviewer_db'; 
