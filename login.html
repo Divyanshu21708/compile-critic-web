@@ -6,18 +6,17 @@
 <title>CompileCritic - AI Code Learning Platform</title>
 <link rel="icon" href="compilecritic-icon.svg" type="image/svg+xml">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<!-- Updated to point to login.css -->
 <link rel="stylesheet" href="login.css">
 </head>
 <body class="auth-body">
 
 <div class="auth-container">
     <div class="logo" onclick="window.location.href='home.html'" style="cursor: pointer;">
-    <img src="compilecritic-logo.svg" alt="CompileCritic Logo" style="height: 65px; width: auto; display: block;">
-</div>
+        <img src="compilecritic-logo.svg" alt="CompileCritic Logo" style="height: 65px; width: auto; display: block;">
+    </div>
     
     <div class="auth-card">
-        <!-- Login Form -->
+        <!-- 1. LOGIN FORM -->
         <div id="login-section">
             <h2 class="auth-title">Welcome Back</h2>
             <form id="login-form">
@@ -31,10 +30,13 @@
                 </div>
                 <button type="submit" class="action-btn run-btn auth-btn">Login</button>
             </form>
+            <div style="text-align: center; margin-top: 15px;">
+                <span id="show-forgot" style="color: #3B82F6; cursor: pointer; font-size: 13px; font-weight: 500;">Forgot Password?</span>
+            </div>
             <p class="auth-switch">Don't have an account? <span id="show-register">Register here</span></p>
         </div>
 
-        <!-- Registration Form (Hidden by default) -->
+        <!-- 2. REGISTRATION FORM -->
         <div id="register-section" style="display: none;">
             <h2 class="auth-title">Create Account</h2>
             <form id="register-form">
@@ -50,67 +52,106 @@
                     <label for="reg-password">Password</label>
                     <input type="password" id="reg-password" required placeholder="Create a password">
                 </div>
+                <!-- New Security Question Fields -->
+                <div class="input-group">
+                    <label for="reg-question">Security Question</label>
+                    <select id="reg-question" required style="width: 100%; background-color: #0F172A; border: 1px solid #334155; border-radius: 8px; padding: 12px 15px; color: white; font-family: 'Poppins', sans-serif;">
+                        <option value="What was your first pet's name?">What was your first pet's name?</option>
+                        <option value="What city were you born in?">What city were you born in?</option>
+                        <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="reg-answer">Security Answer</label>
+                    <input type="text" id="reg-answer" required placeholder="Your secret answer">
+                </div>
                 <button type="submit" class="action-btn ai-btn auth-btn">Sign Up</button>
             </form>
             <p class="auth-switch">Already have an account? <span id="show-login">Login here</span></p>
         </div>
+
+        <!-- 3. FORGOT PASSWORD FORM -->
+        <div id="forgot-section" style="display: none;">
+            <h2 class="auth-title">Reset Password</h2>
+            <form id="forgot-form">
+                <div class="input-group">
+                    <label for="forgot-email">Registered Email</label>
+                    <input type="email" id="forgot-email" required placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="forgot-answer">Security Answer</label>
+                    <input type="text" id="forgot-answer" required placeholder="Enter your secret answer">
+                </div>
+                <div class="input-group">
+                    <label for="forgot-new-password">New Password</label>
+                    <input type="password" id="forgot-new-password" required placeholder="Enter new password">
+                </div>
+                <button type="submit" class="action-btn submit-btn auth-btn" style="background-color: #eab308;">Reset Password</button>
+            </form>
+            <p class="auth-switch">Remember your password? <span id="show-login-from-forgot">Login here</span></p>
+        </div>
+
     </div>
 </div>
 
 <script>
     const API_BASE = "";
+    
+    // UI Elements
     const loginSection = document.getElementById('login-section');
     const registerSection = document.getElementById('register-section');
-    const showRegisterBtn = document.getElementById('show-register');
-    const showLoginBtn = document.getElementById('show-login');
-
-    // Toggle Views
-    showRegisterBtn.addEventListener('click', () => {
+    const forgotSection = document.getElementById('forgot-section');
+    
+    // Toggles
+    document.getElementById('show-register').addEventListener('click', () => {
         loginSection.style.display = 'none';
         registerSection.style.display = 'block';
     });
-
-    showLoginBtn.addEventListener('click', () => {
+    document.getElementById('show-login').addEventListener('click', () => {
         registerSection.style.display = 'none';
         loginSection.style.display = 'block';
     });
+    document.getElementById('show-forgot').addEventListener('click', () => {
+        loginSection.style.display = 'none';
+        forgotSection.style.display = 'block';
+    });
+    document.getElementById('show-login-from-forgot').addEventListener('click', () => {
+        forgotSection.style.display = 'none';
+        loginSection.style.display = 'block';
+    });
 
-    // Handle Registration Submit
+    // 1. Handle Registration
     document.getElementById('register-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-        
         const name = document.getElementById('reg-name').value;
         const email = document.getElementById('reg-email').value;
         const password = document.getElementById('reg-password').value;
+        const securityQuestion = document.getElementById('reg-question').value;
+        const securityAnswer = document.getElementById('reg-answer').value;
 
         try {
             const response = await fetch(`${API_BASE}/api/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password })
+                body: JSON.stringify({ name, email, password, securityQuestion, securityAnswer })
             });
-
-            let data = {};
-            try { data = await response.json(); } catch(err) {}
-
+            const data = await response.json();
             if (response.ok) {
-                alert(data.message || 'User registered successfully!');
+                alert(data.message);
                 registerSection.style.display = 'none';
                 loginSection.style.display = 'block';
                 document.getElementById('register-form').reset();
             } else {
-                alert(data.message || `Registration failed (Status ${response.status})`);
+                alert(data.message);
             }
         } catch (error) {
-            console.error('Registration fetch error:', error);
             alert("Connection Error: Unable to reach the server.");
         }
     });
 
-    // Handle Login Submit
+    // 2. Handle Login
     document.getElementById('login-form').addEventListener('submit', async (e) => {
         e.preventDefault();
-
         const email = document.getElementById('login-email').value;
         const password = document.getElementById('login-password').value;
 
@@ -120,20 +161,42 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
-
-            let data = {};
-            try { data = await response.json(); } catch(err) {}
-            
+            const data = await response.json();
             if (response.ok) {
                 localStorage.setItem('user', JSON.stringify(data.user));
-                alert('Login successful!');
                 window.location.href = 'index.html';
             } else {
-                alert(data.message || `Login failed (Status ${response.status})`);
+                alert(data.message);
             }
         } catch (error) {
-            console.error('Login fetch error:', error);
-            alert(`Connection Error: Unable to connect to backend server at http://localhost:${BACKEND_PORT}. Make sure 'npm start' or 'node server.js' is running!`);
+            alert("Connection Error: Ensure your server is running.");
+        }
+    });
+
+    // 3. Handle Forgot Password
+    document.getElementById('forgot-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('forgot-email').value;
+        const securityAnswer = document.getElementById('forgot-answer').value;
+        const newPassword = document.getElementById('forgot-new-password').value;
+
+        try {
+            const response = await fetch(`${API_BASE}/api/forgot-password`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, securityAnswer, newPassword })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.message);
+                forgotSection.style.display = 'none';
+                loginSection.style.display = 'block';
+                document.getElementById('forgot-form').reset();
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            alert("Connection Error: Ensure your server is running.");
         }
     });
 </script>
