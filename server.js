@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(__dirname, { index: 'home.html' }));
 
+
 // Connect to MongoDB
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/code_reviewer_db'; 
 mongoose.connect(MONGO_URI)
@@ -103,13 +104,22 @@ app.post(['/api/run', '/api/compile'], async (req, res) => {
 // ==========================================
 app.post('/api/register', async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, securityQuestion, securityAnswer } = req.body;
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(400).json({ message: 'User already exists.' });
         
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        const newUser = new User({ name, email, password: hashedPassword });
+        // Hash the security answer so it's safely encrypted in the database!
+        const hashedAnswer = await bcrypt.hash(securityAnswer, salt); 
+        
+        const newUser = new User({ 
+            name, 
+            email, 
+            password: hashedPassword,
+            securityQuestion,
+            securityAnswer: hashedAnswer
+        });
         await newUser.save();
         res.status(201).json({ message: 'User registered successfully!' });
     } catch (error) {
@@ -132,6 +142,53 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ message: 'Server error during login.' });
     }
 });
+
+app.post('/api/forgot-password', async (req, res) => {
+    try {
+        const { email, securityAnswer, newPassword } = req.body;
+        
+        // 1. Find user by email
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ message: 'User not found.' });
+
+        // 2. Compare the provided answer with the hashed answer in the database
+        const isMatch = await bcrypt.compare(securityAnswer, user.securityAnswer);
+        if (!isMatch) return res.status(400).json({ message: 'Incorrect security answer.' });
+
+        // 3. Hash the new password and update
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(newPassword, salt);
+        await user.save();
+
+        res.status(200).json({ message: 'Password reset successful! You can now log in.' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error during password reset.' });
+    }
+});
+
+app.post('/api/forgot-password', async (req, res) => {
+    try {
+        const { email, securityAnswer, newPassword } = req.body;
+        
+        // 1. Find user by email
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ message: 'User not found.' });
+
+        // 2. Compare the provided answer with the hashed answer in the database
+        const isMatch = await bcrypt.compare(securityAnswer, user.securityAnswer);
+        if (!isMatch) return res.status(400).json({ message: 'Incorrect security answer.' });
+
+        // 3. Hash the new password and update
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(newPassword, salt);
+        await user.save();
+
+        res.status(200).json({ message: 'Password reset successful! You can now log in.' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error during password reset.' });
+    }
+});
+
 
 // ==========================================
 // 3. SNIPPET HISTORY ROUTES
