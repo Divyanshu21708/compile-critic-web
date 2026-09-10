@@ -13,6 +13,15 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    // --- NEW SECURITY FIELDS ---
+    securityQuestion: {
+        type: String,
+        required: true
+    },
+    securityAnswer: {
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 
